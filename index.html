@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="sharecontent" data-msg-img="你的缩略图地址" data-msg-title="你的标题" data-msg-content="你的简介" data-msg-callBack="" data-line-img="你的缩略图地址" data-line-title="你的标题" data-line-callBack=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>简爱-恋爱类型测评</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="简爱">
+    <meta name="msapplication-TileColor" content="#ec672a">
+    <script src="./assets/js/rem.js"></script>
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/com-phone.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/vue.min.js"></script>
+  </head>
+  <body>
+    <div style="display:none"><img src="./assets/img/logo.jpg"></div>
+    <div class="page1" id="app">
+      <h3 class="title">恋爱类型测评</h3>
+      <p class="p" v-if="!start">恋爱类型，藏在我们的潜意识中，对我们择偶观念和行为产生极大影响。</p>
+      <p class="p" v-if="!start">你知道你的恋爱类型吗？由权威心理学家研发的《恋爱类型测评》专业量表，深度解读你的恋爱类型倾向、推荐你适合的恋爱对象类型，帮助你遇见自己，遇见爱。</p>
+      <p class="p border-p" v-if="!start">测试须知：请按你在爱情中的真实表现和感受作答。</p>
+      <button type="button" class="btn" name="button" @click="start=true" v-if="!start">开始答题</button>
+      <div class="slide-wrap" v-if="start">
+        <ul class="qustion-ul" :style="'margin-top:'+marginTop+'rem'">
+          <li class="qustion" v-for="item,index in questions">
+            <p class="qustion-name">{{item.name}}</p>
+            <ul class="radio-ul">
+              <li v-for="li in radios" :class="{'active':item.val == li.val}" @click="choose(index,li.val)">
+                <input type="radio" name="" value=""> {{li.label}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    methods: {
+      choose: function (index,val) {
+        this.questions[index]['val'] = val
+        if (this.active < this.questions.length - 1) {
+          this.active++
+          this.marginTop = -(this.active*5)
+        } else {
+          var arr = this.questions
+          var type1=0,type2=0,type3=0,type4=0,type5=0,type6=0
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i]['type']==1) {
+              type1+=arr[i]['val']
+            } else if (arr[i]['type']==2) {
+              type2+=arr[i]['val']
+            } else if (arr[i]['type']==3) {
+              type3+=arr[i]['val']
+            } else if (arr[i]['type']==4) {
+              type4+=arr[i]['val']
+            } else if (arr[i]['type']==5) {
+              type5+=arr[i]['val']
+            } else if (arr[i]['type']==6) {
+              type6+=arr[i]['val']
+            }
+          }
+          var types = [
+            {name:'type1',val:type1},
+            {name:'type2',val:type2},
+            {name:'type3',val:type3},
+            {name:'type4',val:type4},
+            {name:'type5',val:type5},
+            {name:'type6',val:type6}
+          ]
+          console.log(types)
+          var maxs = [types[0]]
+          for (var j = 1; j < types.length; j++) {
+            if (types[j]['val']>maxs[0]['val']) {
+              max = types[j]['val']
+              maxs.unshift(types[j])
+            }
+          }
+          window.location.href='./result.html?type='+maxs[0]['name']
+          console.log('结果为'+maxs[0]['name'])
+        }
+      }
+    },
+    data: function () {
+      return {
+        start: false,
+        marginTop: 0,
+        active: 0,
+        questions: [
+          {name: '1、我和他/她属于一见钟情型。', val: '', type: 1},
+          {name: '2、我很难明确地说我和他/她是何时从友情变成爱情的。', val: '', type: 2},
+          {name: '3、对他/她做承诺之前，我会考虑他/她将来可能变成的样子', val: '', type: 3},
+          {name: '4、我总是试着帮他/她度过难关。', val: '', type: 4},
+          {name: '5、和他/她的关系不太对劲时，我的身体就会不舒服。', val: '', type: 5},
+          {name: '6、我试着不给他/她明确的承诺。', val: '', type: 6},
+
+          {name: '7、在选择他/她之前，我会先试着仔细规划我的人生。', val: '', type: 1},
+          {name: '8、我宁愿自己痛苦，也不愿意让他/她受苦。', val: '', type: 2},
+          {name: '9、失恋时，我会十分沮丧，甚至会有自杀的念头。', val: '', type: 3},
+          {name: '10、我相信他/她不知道我的一些事，也不会受到伤害。', val: '', type: 4},
+          {name: '11、我和他/她很来电。', val: '', type: 5},
+          {name: '12、我需要先经过一阵子的关心和照顾，才有可能产生爱情。', val: '', type: 6},
+
+          {name: '13、我和他/她最好有相似的背景。', val: '', type: 1},
+          {name: '14、有时候，我得防范他/她发现我还有其他情人。', val: '', type: 2},
+          {name: '15、我和他/她的亲密行为是很热情且很令我满意。', val: '', type: 3},
+          {name: '16、我有时会因为想到自己正在谈恋爱而兴奋地睡不着觉。', val: '', type: 4},
+          {name: '17、我可以很容易、很快地忘掉过往的恋情。', val: '', type: 5},
+          {name: '18、他/她如何看待我的家人是我选择他/她的主要考量。', val: '', type: 6},
+
+          {name: '19、我希望和曾经相爱的他/她是永远的朋友。', val: '', type: 1},
+          {name: '20、当他/她不注意我时，我会全身不舒服。', val: '', type: 2},
+          {name: '21、我和他/她的爱情关系是最理想因为是由长久的友谊发展而成的。', val: '', type: 3},
+          {name: '22、我觉得我和他/她是天生一对。', val: '', type: 4},
+          {name: '23、自从和他/她谈恋爱后，我很难专心在其他任何事情上。', val: '', type: 5},
+          {name: '24、他/她将来会不会是一个好父亲/母亲是我选择他/她的一个重要因素。', val: '', type: 6},
+
+          {name: '25、除非我先让他/她快乐，否则我不会感到快乐。', val: '', type: 1},
+          {name: '26、.如果他/她知道我和其他人做了某些事，他/她会不高兴。', val: '', type: 2},
+          {name: '27、我和他/她的感情、亲密行为进展得很快。', val: '', type: 3},
+          {name: '28、我和他/她的友情随着时间逐渐转变为爱情。', val: '', type: 4},
+          {name: '29、当他/她太依赖我时，我会想和他/她疏远一些。', val: '', type: 5},
+          {name: '30、我通常愿意牺牲自己的愿望，达成他/她的愿望。', val: '', type: 6},
+
+          {name: '31、我和他/她的爱情是一种深刻的友情，而不是一种很神秘的情感。', val: '', type: 1},
+          {name: '32、他/她可以任意使用我的东西。', val: '', type: 2},
+          {name: '33、我和他/她非常了解彼此。', val: '', type: 3},
+          {name: '34、当我怀疑他/她和其他人在一起时，我就无法放松。', val: '', type: 4},
+          {name: '35、他/她如何看待我的职业会是我选择他/她的一个考量。', val: '', type: 5},
+          {name: '36、他/她的外貌符合我的理想标准。', val: '', type: 6},
+
+          {name: '37、我享受和他/她及一些不同的情人玩爱情游戏。', val: '', type: 1},
+          {name: '38、当他/她对我发脾气时，我仍然全心全意、无条件地爱他/她。', val: '', type: 2},
+          {name: '39、在和他/她深入交往之前，我会试着了解他/她是否有良好的遗传基因。', val: '', type: 3},
+          {name: '40、为了他/她，我愿意忍受任何事情。', val: '', type: 4},
+          {name: '41、如果他/她忽略我一阵子，我会做出一些傻事来吸引他/她的注意力。', val: '', type: 5},
+          {name: '42、我和他/她的爱情关系是最令人满意，因为是由良好友情发展成的', val: '', type: 6},
+        ],
+        radios: [
+          {label: '完全不符合', val: 1},
+          {label: '不符合', val: 2},
+          {label: '没意见', val: 3},
+          {label: '符合', val: 4},
+          {label: '完全符合', val: 5}
+        ]
+      }
+    }
+  })
+  </script>
+</html>

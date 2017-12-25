@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="sharecontent" data-msg-img="你的缩略图地址" data-msg-title="你的标题" data-msg-content="你的简介" data-msg-callBack="" data-line-img="你的缩略图地址" data-line-title="你的标题" data-line-callBack=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>简爱-恋爱类型测评</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="简爱">
+    <meta name="msapplication-TileColor" content="#ec672a">
+    <script src="./assets/js/rem.js"></script>
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/com-phone.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/vue.min.js"></script>
+  </head>
+  <body>
+    <div class="page2" id="result">
+      <div class="top">— 您的测试结果 —</div>
+      <h3 class="title">{{result.name}}</h3>
+      <p class="p">从本次测评结果上看，你的恋爱类型倾向于“{{result.name}}”。</p>
+      <p class="p">{{result.val}}</p>
+      <div class="btns">
+        <a href="./index.html">再试一次</a>
+        <a class="share-btn" @click="showMask=true">分享给好友</a>
+      </div>
+      <div class="love-desc">
+        关注简爱，遇见自己，遇见爱
+      </div>
+      <div class="qr-code">
+        <img src="./assets/img/qr_code.jpg">
+      </div>
+      <p class="code-txt">长按识别二维码关注</p>
+      <div class="share-mask" v-show="showMask" @click="showMask=false"></div>
+    </div>
+  </body>
+  <script type="text/javascript">
+  function getRouteQuery () {
+    var searchStr = window.location.search.slice(1)
+    var searchArr = searchStr.split('&')
+    var query = {}
+    for (var i = 0; i < searchArr.length; i++) {
+      var item = searchArr[i].split('=')
+      query[item[0]] = item[1]
+    }
+    return query
+  }
+  var app = new Vue({
+    el: '#result',
+    data: function () {
+      return {
+        showMask: false,
+        result: {},
+        type: getRouteQuery().type || 'type1',
+        list: [
+          {type:'type1',name:'浪漫型',val:'浪漫型的爱情较易出现一见钟情的情况，由于未曾深入了解对方，因此最常见的情况是受到对方外表容貌与身材所吸引。这种形式的爱情重视恋爱过程中的强烈感受，情绪也容易随着感情变化而强烈起伏，由于情感强烈，也就容易发展出激情的肉体关系。然而，在一段强烈的肉欲激情之后，当激情消退，也容易因此出现爱恋的感觉减退，较无法长期维持爱情关系。'},
+          {type:'type2',name:'游戏型',val:'游戏型的爱情不存在彼此对未来的承诺，视爱情为游戏，常常属于短暂的爱情关系。游戏型爱情的人视爱情为满足自我成就的一种刺激游戏，常同时游走于不同的恋人之间，且不认为这有什么不好。或许这种爱情的人在转换不同伴侣的过程中，也会失去体会圆满爱情的机会。'},
+          {type:'type3',name:'同伴型',val:'同伴型感情发展细水长流，平静而祥和，通常刚开始时都只是好朋友的关系，后来才慢慢从相知友谊发展成爱情。但缺乏激情的成分，而以情感亲密为发展恋情的重点，这类的爱情常由平淡的友情开始，在经过长期相处交往中彼此逐渐了解，并彼此相互帮忙呵护，才逐渐由友情不知不觉地转化为爱情，他们很难明确说出自己是从何时才开始喜欢对方，也相信只有深入了解对方才能长长久久相互扶持走一辈子的路。'},
+          {type:'type4',name:'现实型',val:'现实型的人选择对象以理性条件的考虑为主，诸如教育背景、经济能力、社会地位、共同兴趣等。现实型的爱情较缺乏感情因素，常以现实条件考量彼此在一起的合适性。例如在认识对方时会先探听对方的家世是否清白，经济能力是否可以持家，对方的身高与年纪是否合适，有没有自己的房子或贷款，有没有稳定的工作，学历是否与自己相当等等。他们决不会盲目的被爱情冲昏头，相信爱情与面包还是面包比较重要。'},
+          {type:'type5',name:'占有型',val:'占有型的人占有欲和嫉妒心强烈，关系也有如风暴，起伏不定，对方一点爱意的表示就会让他狂喜，一点点降温或关系出现点小问题就痛苦不已。占有型的爱情相当在乎自己在对方心目中的地位，希望对方能够一心一意关心自己而不能疏忽自己的感受。这类爱情的人在恋爱时眼中也只有对方，而忽略身旁其它重要的事务，也因此容易造成对方的压力。由于强烈的独占感，使这类爱情的人遭遇背叛或分手时，容易出现无法忍受的痛苦，因而可能以自我伤害或伤害对方来发泄或威胁对方不能离开自己。'},
+          {type:'type6',name:'奉献型',val:'奉献型的人为爱人完全付出自己，关心对方而不求回报。这种人极有耐心、不要求对方，甚至不嫉妒。奉献型爱情的人会无私无悔地将所有心力放在供给对方快乐，他们从不在意自己是否幸福快乐，对方能够幸福快乐对自己来说就是最大的满足。在这种爱情关系下，这种爱情类型者容易失去自我，且处在一种双方不平等的交往关系中，即使遭遇分手，也只会自责自己为对方做的还不够。'}
+        ]
+      }
+    },
+    created: function () {
+      for (var i = 0; i < this.list.length; i++) {
+        if (this.list[i]['type']==this.type) {
+          this.result=this.list[i]
+        }
+      }
+    }
+  })
+  </script>
+</html>

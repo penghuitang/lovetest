@@ -1,0 +1,132 @@
+html,body{
+  height: 100%;
+}
+.page1{
+  width: 6.4rem;
+  padding: 0 .2rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  min-height: 100%;
+  background: url(../img/bg1.jpg) no-repeat center top;
+  background-size: cover;
+}
+.page1 .title{
+  text-align: center;
+  font-size: .36rem;
+  padding: .7rem 0 .3rem;
+  margin-bottom: .3rem;
+}
+.page1 .btn{
+  border-radius: .1rem;
+  display: block;
+  width: 3rem;
+  height: .8rem;
+  margin: .3rem auto;
+  border:1px solid #fff;
+  background: none;
+  background: pink;
+  border: 1px solid #fff;
+  color:#fff;
+  outline: none;
+}
+.border-p{
+  padding-bottom: .2rem;
+  margin-bottom: .2rem;
+}
+.slide-wrap{
+  overflow: hidden;
+  height: 5rem;
+}
+.slide-wrap .qustion-ul{
+  transition: all .6s;
+}
+.slide-wrap .qustion{
+  line-height: .5rem;
+}
+.slide-wrap .qustion-name{
+  font-size: .3rem;
+  height: 1rem;
+  line-height: .4rem;
+}
+.page1 .p{
+  line-height: .5rem;
+  margin-bottom: .1rem;
+}
+.p{
+  text-indent: 2em;
+}
+.radio-ul{
+  height: 4rem;
+}
+.radio-ul li{
+  line-height: .8rem;
+  border-top: 1px solid #fff;
+  padding-left: .2rem;
+}
+.radio-ul .active{
+  color: pink;
+}
+.page2{
+  width: 6.4rem;
+  padding: 0 .2rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  min-height: 100%;
+  background: url(../img/bg1.jpg) no-repeat center top;
+  background-size: cover;
+}
+.page2 .top{
+  text-align: center;
+  padding-top: .3rem;
+}
+.page2 .title{
+  text-align: center;
+  font-size: .5rem;
+  font-weight: 600;
+  margin: .2rem auto;
+}
+.page2 .btns {
+  margin-top: .5rem;
+  overflow: hidden;
+  padding: 0 .3rem;
+}
+.page2 .btns a{
+  float: left;
+  display: block;
+  width: 2rem;
+  line-height: .6rem;
+  text-align: center;
+  background: pink;
+  color: #fff;
+  border-radius: .3rem;
+}
+.page2 .btns .share-btn{
+  float: right;
+}
+.love-desc{
+  width: 5rem;
+  margin: .2rem auto;
+  border-bottom: 1px solid #ccc;
+  line-height: .6rem;
+  text-align: center;
+}
+.qr-code{
+  text-align: center;
+}
+.qr-code img{
+  margin-top: .3rem;
+  width: 2rem;
+}
+.code-txt{
+  text-align: center;
+  font-size: .24rem;
+}
+.share-mask{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: url(../img/wxshare_tips.png) no-repeat center top;
+  background-size: cover;
+}
